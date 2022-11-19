@@ -32,7 +32,11 @@
                 {% endif %}
             </li>
             <li class="nav-item me-auto">
-                <a class="nav-link hoverLink rounded disabled" href="{% url 'main:console' %}">Console(in development)</a>
+              {% if request.path == '/control' %}
+              <a class="nav-link hoverLink active rounded" href="{% url 'main:control_dev' %}">Control Device</a>
+              {% else %}
+              <a class="nav-link hoverLink rounded" href="{% url 'main:control_dev' %}">Control Device</a>
+              {% endif %}
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item navbar-text text-light me-3">

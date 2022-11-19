@@ -21,6 +21,5 @@ class IndexPageView(LoginRequiredMixin, TemplateView):
 class LogsPageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/c_logs.html'
 
-#command line for speaking with controller
-class CommandLinePageView(LoginRequiredMixin, TemplateView):
-    template_name = 'main/console.html'
+class ControlDevicePageView(LoginRequiredMixin, TemplateView):
+    template_name = 'main/control_device.html'
