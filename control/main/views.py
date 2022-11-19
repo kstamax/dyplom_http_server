@@ -1,23 +1,26 @@
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
 #login
-class LoginPageView():
-    pass
-
-#register
-class RegisterPageView():
-    pass
+class LoginPageView(LoginView):
+    template_name = 'main/login.html'
+    fields = '__all__'
+    redirect_authenticated_user = True
+    def get_success_url(self):
+        return reverse_lazy('main:index')
 
 #main page
-class IndexPageView(TemplateView):
+class IndexPageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/index.html'
 
-class LogsPageView(TemplateView):
+class LogsPageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/c_logs.html'
 
 #command line for speaking with controller
-class CommandLinePageView(TemplateView):
+class CommandLinePageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/console.html'
