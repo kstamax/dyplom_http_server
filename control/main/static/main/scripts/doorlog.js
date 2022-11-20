@@ -19,9 +19,34 @@ const BASE_API_URL = `api/doorlogs`
                 var item = `
                 <li class="list-group-item ${text_color}">${list[i]['log_date']}  ${list[i]['door_state']}</li>
                 `;
-                console.log(list)
                 lst.innerHTML += item;
-                console.log(list.innerHTML)
+            }
+        })
+    }
+    setInterval(function(){ 
+        liveUpdate()   
+    }, 2000);
+    function liveUpdate(){
+        var lst = document.getElementById("itemsList");
+        var url = BASE_API_URL;
+        fetch(url)
+        .then((resp)=>resp.json())
+        .then(function(data){
+            var list = data;
+            for (var i in list){
+                text_color = ''
+                if(list[i]['door_state'] === 'opened'){
+                    text_color='text-success'
+                }
+                else{
+                    text_color='text-danger'
+                } 
+                var item = `
+                <li class="list-group-item ${text_color}">${list[i]['log_date']}  ${list[i]['door_state']}</li>
+                `;
+                if(!lst.innerHTML.includes(item)){
+                    lst.innerHTML += item;
+                }
             }
         })
     }
