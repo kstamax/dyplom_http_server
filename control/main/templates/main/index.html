@@ -1,16 +1,14 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block content %}
 <div class="border-bottom border-dark mb-5 pb-1">
     <h3 class="text-dark d-inline-block me-5">Door's open log journal</h3>
     <form class="d-inline-block">
         <div class="form-group d-inline-block">
-            <label for="exampleFormControlSelect1">Example select</label>
+            <label for="exampleFormControlSelect1">Search logs</label>
             <select class="form-control form-control-sm" id="exampleFormControlSelect1">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            <option>closed</option>
+            <option>opened</option>
             </select>
         </div>
         <div class="form-group d-inline-block mx-3">
@@ -19,8 +17,7 @@
         <button type="button" class="btn btn-dark btn-sm">Search</button>
     </form>
 </div>
-<ul>
-    <li><p>Log1</p></li>
-    <li><p>Log1</p></li>
+<ul class="list-group" id="itemsList">
 </ul>
+<script src="{% static 'main/scripts/doorlog.js' %}"></script>
 {% endblock content %}

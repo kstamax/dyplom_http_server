@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework import status
+from django.http import Http404
+from rest_framework import generics
+from rest_framework.views import APIView
+from rest_framework import permissions
+from .serializers import DoorLogSerializer, DeviceLogSerializer
 
-# Create your views here.
+from .models import DoorLog, DeviceLog
+
+class DoorLogList(generics.ListAPIView):
+    serializer_class = DoorLogSerializer
+    def get_queryset(self):
+        return DoorLog.objects.all()
+
+class DeviceLogList(generics.ListAPIView):
+    serializer_class = DeviceLogSerializer
+    def get_queryset(self):
+        return DeviceLog.objects.all()

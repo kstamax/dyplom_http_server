@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block content %}
 <div class="border-bottom border-dark mb-5 pb-1">
     <h3 class="text-dark d-inline-block me-5">Controller's log journal</h3>
@@ -19,9 +20,8 @@
         <button type="button" class="btn btn-dark btn-sm">Search</button>
     </form>
 </div>
-<ul>
-    <li><p>Log1</p></li>
-    <li><p>Log1</p></li>
+<ul class="list-group" id="itemsList">
 </ul>
+<script src="{% static 'main/scripts/devicelog.js' %}"></script>
 {% endblock content %}
 

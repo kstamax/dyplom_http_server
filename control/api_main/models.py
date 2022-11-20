@@ -11,8 +11,8 @@ class DoorLog(models.Model):
 
 class DeviceLog(models.Model):
     MESSAGE_TYPES = (
-        ("error", "error"),
-        ("info", "info")
+        ("ERROR", "ERROR"),
+        ("INFO", "INFO")
     )
     log_date = models.DateTimeField()
     message_type = models.CharField(max_length=10, choices=MESSAGE_TYPES)
