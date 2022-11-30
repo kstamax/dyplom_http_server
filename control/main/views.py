@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, TemplateView
+from django.views.generic import TemplateView
+from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-
+from api_main.models import DoorLog
+from datetime import datetime
+from django.http import HttpResponse
+from client_controller.send_commands import Esp
 # Create your views here.
 
 #login
@@ -23,3 +27,30 @@ class LogsPageView(LoginRequiredMixin, TemplateView):
 
 class ControlDevicePageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/control_device.html'
+
+class GerkonView(View):
+    def get(self, request, *args, **kwargs):
+        state = kwargs['key_id']
+        msg =''
+        if state == 1:
+            msg = 'opened'
+        else:
+            msg = 'closed'
+        DoorLog.objects.create(log_date=datetime.now(),door_state=msg)
+        return HttpResponse(status=204)
+
+class LedControlView(View):
+    def get(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            try:
+                esp = Esp("192.168.0.108")
+                state = kwargs['state']
+                esp.change_led_state(state)
+                return HttpResponse(status=204)
+            except Exception as e:
+                return HttpResponse(e,status=500)
+        else:
+            return redirect('/login')
+
+
+

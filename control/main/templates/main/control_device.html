@@ -1,6 +1,6 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<h2 class="text-dark">Relay 1 is <span class="text-danger">Off</span><span class="text-success">On</span></h2>
-<button type="button" class="btn btn-success">On</button>
-<button type="button" class="btn btn-danger">Off</button>
+<h2 class="text-dark">Led</h2>
+<a class="btn btn-success" href="{% url 'main:led' state='on'%}">On</a>
+<a class="btn btn-danger" href="{% url 'main:led' state='off'%}">Off</a>
 {% endblock content %}
