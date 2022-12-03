@@ -11,9 +11,9 @@ from .models import DoorLog, DeviceLog
 class DoorLogList(generics.ListAPIView):
     serializer_class = DoorLogSerializer
     def get_queryset(self):
-        return DoorLog.objects.all()
+        return DoorLog.objects.all().order_by("-log_date")
 
 class DeviceLogList(generics.ListAPIView):
     serializer_class = DeviceLogSerializer
     def get_queryset(self):
-        return DeviceLog.objects.all()
+        return DeviceLog.objects.all().order_by("-log_date")

@@ -45,7 +45,7 @@ const BASE_API_URL = `api/doorlogs`
                 <li class="list-group-item ${text_color}">${list[i]['log_date']}  ${list[i]['door_state']}</li>
                 `;
                 if(!lst.innerHTML.includes(item)){
-                    lst.innerHTML += item;
+                    lst.innerHTML = item + lst.innerHTML;
                 }
             }
         })

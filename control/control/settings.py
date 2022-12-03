@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'main',
     'api_main',
     'rest_framework',
-    'device_requests',
 ]
 
 MIDDLEWARE = [
