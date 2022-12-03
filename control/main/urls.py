@@ -9,7 +9,7 @@ urlpatterns = [
     path('login',LoginPageView.as_view(),name='login'),
     path('logout/', LogoutView.as_view(next_page='main:login'), name='logout'),
     path('clogs',LogsPageView.as_view(),name='c_logs'),
-    path('gerkon/<int:key_id>', GerkonView.as_view(), name='gerkon'),
+    path('gerkon/<int:key_id>/<str:time>', GerkonView.as_view(), name='gerkon'),
     path('led/<str:state>', LedControlView.as_view(), name='led')
 
 ]

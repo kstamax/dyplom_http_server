@@ -5,7 +5,7 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from api_main.models import DoorLog
-from datetime import datetime
+import datetime as dt
 from django.http import HttpResponse
 from client_controller.send_commands import Esp
 # Create your views here.
@@ -31,12 +31,14 @@ class ControlDevicePageView(LoginRequiredMixin, TemplateView):
 class GerkonView(View):
     def get(self, request, *args, **kwargs):
         state = kwargs['key_id']
+        time_string = dt.datetime.strptime(kwargs['time'],"%H:%M:%S").time()
         msg =''
         if state == 1:
             msg = 'opened'
         else:
             msg = 'closed'
-        DoorLog.objects.create(log_date=datetime.now(),door_state=msg)
+        datetime_obj = dt.datetime.combine(dt.date.today(), time_string)
+        DoorLog.objects.create(log_date=datetime_obj,door_state=msg)
         return HttpResponse(status=204)
 
 class LedControlView(View):
@@ -51,6 +53,7 @@ class LedControlView(View):
                 return HttpResponse(e,status=500)
         else:
             return redirect('/login')
+
 
 
 
