@@ -28,19 +28,6 @@ class LogsPageView(LoginRequiredMixin, TemplateView):
 class ControlDevicePageView(LoginRequiredMixin, TemplateView):
     template_name = 'main/control_device.html'
 
-class GerkonView(View):
-    def get(self, request, *args, **kwargs):
-        state = kwargs['key_id']
-        time_string = dt.datetime.strptime(kwargs['time'],"%H:%M:%S").time()
-        msg =''
-        if state == 1:
-            msg = 'opened'
-        else:
-            msg = 'closed'
-        datetime_obj = dt.datetime.combine(dt.date.today(), time_string)
-        DoorLog.objects.create(log_date=datetime_obj,door_state=msg)
-        return HttpResponse(status=204)
-
 class LedControlView(View):
     def get(self,request,*args,**kwargs):
         if request.user.is_authenticated:
