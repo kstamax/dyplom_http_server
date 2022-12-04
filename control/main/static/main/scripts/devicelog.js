@@ -11,7 +11,7 @@ const BASE_API_URL = `api/devicelogs`
             for (var i in list){
                 text_color = ''
                 if(list[i]['message_type'] === 'INFO'){
-                    text_color='text-warning'
+                    text_color='text-primary'
                 }
                 else{
                     text_color='text-danger'
@@ -36,7 +36,7 @@ const BASE_API_URL = `api/devicelogs`
             for (var i in list){
                 text_color = ''
                 if(list[i]['message_type'] === 'INFO'){
-                    text_color='text-warning'
+                    text_color='text-primary'
                 }
                 else{
                     text_color='text-danger'
