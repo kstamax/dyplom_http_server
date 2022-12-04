@@ -45,7 +45,7 @@ const BASE_API_URL = `api/devicelogs`
                 <li class="list-group-item ${text_color}">${list[i]['message_type']}    ${list[i]['log_date']}    ${list[i]['message_body']}</li>
                 `;
                 if(!lst.innerHTML.includes(item)){
-                    lst.innerHTML += item;
+                    lst.innerHTML = item + lst.innerHTML;
                 }
             }
         })

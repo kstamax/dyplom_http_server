@@ -32,7 +32,11 @@ class DoorLogPostHandler(APIView):
         time_string = request.data['time']
         date_string = request.data['date']
         date_time_string = f'{date_string} {time_string}'
-        serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
+        if date_string[:4] == "1970":
+            serializer_data['log_date'] = dt.datetime.now()
+        else:
+            date_time_string = f'{date_string} {time_string}'
+            serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
         if state == "1":
             serializer_data['door_state'] = 'opened'
         else:
@@ -54,8 +58,11 @@ class DeviceLogPostHandler(APIView):
         msg_body = request.data['action']
         time_string = request.data['time']
         date_string = request.data['date']
-        date_time_string = f'{date_string} {time_string}'
-        serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
+        if date_string[:4] == "1970":
+            serializer_data['log_date'] = dt.datetime.now()
+        else:
+            date_time_string = f'{date_string} {time_string}'
+            serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
         serializer_data['message_body'] = msg_body
         serializer_data['message_type'] = msg_type
         serializer = DeviceLogSerializer(data = serializer_data)
