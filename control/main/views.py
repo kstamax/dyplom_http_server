@@ -54,6 +54,18 @@ class RelayControlView(View):
         else:
             return redirect('/login')
 
+class ResetDeviceView(View):
+    def get(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            try:
+                esp = Esp("192.168.0.108")
+                esp.reset_device()
+                return HttpResponse(status=204)
+            except Exception as e:
+                return HttpResponse(e,status=500)
+        else:
+            return redirect('/login')
+
 
 
 

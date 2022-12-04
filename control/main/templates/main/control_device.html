@@ -1,9 +1,18 @@
 {% extends 'main/base.html' %}
 {% block content %}
-<h2 class="text-dark">Led</h2>
-<a class="btn btn-success" href="{% url 'main:led' state='on'%}">On</a>
-<a class="btn btn-danger" href="{% url 'main:led' state='off'%}">Off</a>
-<h2 class="text-dark">Relay</h2>
-<a class="btn btn-success" href="{% url 'main:relay' state='on'%}">Open</a>
-<a class="btn btn-danger" href="{% url 'main:relay' state='off'%}">Close</a>
+<ul class="list-group" id="itemsList">
+    <li class="list-group-item">
+        <h3 class="text-dark d-inline-block me-3">Led</h2>
+        <a class="btn btn-success" href="{% url 'main:led' state='on'%}">On</a>
+        <a class="btn btn-danger" href="{% url 'main:led' state='off'%}">Off</a>
+    </li>
+    <li class="list-group-item">
+        <h3 class="text-dark d-inline-block me-3">Relay</h2>
+        <a class="btn btn-success" href="{% url 'main:relay' state='on'%}">Open</a>
+        <a class="btn btn-danger" href="{% url 'main:relay' state='off'%}">Close</a>
+    </li>
+    <li class="list-group-item">
+        <a class="btn btn-primary d-inline-block" href="{% url 'main:resetd'%}">Reset device</a>
+    </li>
+</ul>
 {% endblock content %}

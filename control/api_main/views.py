@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import permissions
 from .serializers import DoorLogSerializer, DeviceLogSerializer
 import datetime as dt
-import logging
+import pytz
 
 from .models import DoorLog, DeviceLog
 
@@ -36,7 +36,7 @@ class DoorLogPostHandler(APIView):
             serializer_data['log_date'] = dt.datetime.now()
         else:
             date_time_string = f'{date_string} {time_string}'
-            serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
+            serializer_data['log_date'] = pytz.utc.localize(dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S"))
         if state == "1":
             serializer_data['door_state'] = 'opened'
         else:
@@ -62,7 +62,7 @@ class DeviceLogPostHandler(APIView):
             serializer_data['log_date'] = dt.datetime.now()
         else:
             date_time_string = f'{date_string} {time_string}'
-            serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
+            serializer_data['log_date'] = pytz.utc.localize(dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S"))
         serializer_data['message_body'] = msg_body
         serializer_data['message_type'] = msg_type
         serializer = DeviceLogSerializer(data = serializer_data)
