@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import IndexPageView, ControlDevicePageView, LogsPageView, LoginPageView, LedControlView
+from .views import IndexPageView, ControlDevicePageView, LogsPageView, LoginPageView, LedControlView, RelayControlView
 from django.contrib.auth.views import LogoutView
 
 app_name = 'main'
@@ -9,6 +9,7 @@ urlpatterns = [
     path('login',LoginPageView.as_view(),name='login'),
     path('logout/', LogoutView.as_view(next_page='main:login'), name='logout'),
     path('clogs',LogsPageView.as_view(),name='c_logs'),
-    path('led/<str:state>', LedControlView.as_view(), name='led')
+    path('led/<str:state>', LedControlView.as_view(), name='led'),
+    path('relay/<str:state>', RelayControlView.as_view(), name='relay')
 
 ]

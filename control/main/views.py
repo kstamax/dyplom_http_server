@@ -41,6 +41,19 @@ class LedControlView(View):
         else:
             return redirect('/login')
 
+class RelayControlView(View):
+    def get(self,request,*args,**kwargs):
+        if request.user.is_authenticated:
+            try:
+                esp = Esp("192.168.0.108")
+                state = kwargs['state']
+                esp.change_relay_state(state)
+                return HttpResponse(status=204)
+            except Exception as e:
+                return HttpResponse(e,status=500)
+        else:
+            return redirect('/login')
+
 
 
 
