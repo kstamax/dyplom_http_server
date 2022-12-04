@@ -42,3 +42,24 @@ class DoorLogPostHandler(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeviceLogPostHandler(APIView):
+    def post(self, request):
+        serializer_data = {
+            'log_date':'',
+            'message_type':'',
+            'message_body':'',
+        }
+        msg_type = request.data['type']
+        msg_body = request.data['action']
+        time_string = request.data['time']
+        date_string = request.data['date']
+        date_time_string = f'{date_string} {time_string}'
+        serializer_data['log_date'] = dt.datetime.strptime(date_time_string,"%Y-%m-%d %H:%M:%S")
+        serializer_data['message_body'] = msg_body
+        serializer_data['message_type'] = msg_type
+        serializer = DeviceLogSerializer(data = serializer_data)
+        if serializer.is_valid() and request.data['api_key']=='poberezhnyi':
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
