@@ -25,12 +25,13 @@ SECRET_KEY = 'django-insecure-#lu64ej&k&3gie(xh_b^6ds%^^bjeq(ou6n#5t$hn8_*2c-c5)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.104', '100.64.23.197']
+ALLOWED_HOSTS = ['192.168.0.104', '100.64.23.197', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'api_main',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +139,5 @@ REST_FRAMEWORK ={
         'rest_framework.parsers.MultiPartParser'
     )
 }
+
+ASGI_APPLICATION = "control.asgi.application"

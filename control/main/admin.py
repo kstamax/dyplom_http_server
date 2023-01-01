@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+# admin.site.register(DoorLog)
+# admin.site.register(DeviceLog)
+admin.site.register(TestModel)
